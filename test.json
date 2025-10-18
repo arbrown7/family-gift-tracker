@@ -1,0 +1,70 @@
+{
+    "name": "Uncle Bob",
+    "anniversary": "1996-03-01T00:00:00.000Z",
+    "relation": "Uncle",
+    "interests": [
+      "Cooking",
+      "Eating",
+      "Sleeping"
+    ],
+    "birthdayGiftIdeas": [
+      "Gift card"
+    ],
+    "christmasGiftIdeas": [
+      "Gift card"
+    ],
+    "anniversaryGiftIdeas": [
+      "Gift card"
+    ],
+    "shirtSize": "XL",
+    "pantSize": "35",
+    "shoeSize": "11"
+},
+
+{
+    "name": "Dad",
+    "anniversary": "1990-04-25T00:00:00.000Z",
+    "relation": "Father",
+    "interests": [
+      "Legos",
+      "Travel"
+    ],
+    "birthdayGiftIdeas": [
+      "Lego set"
+    ],
+    "christmasGiftIdeas": [
+      "Lego set"
+    ],
+    "anniversaryGiftIdeas": [
+      "Lego set"
+    ],
+    "shirtSize": "L",
+    "pantSize": "33",
+    "shoeSize": "11"
+},
+
+{
+    "name": "Mom",
+    "anniversary": "1990-04-25T00:00:00.000Z",
+    "relation": "Mother",
+    "interests": [
+      "Plants",
+      "Cleaning"
+    ],
+    "birthdayGiftIdeas": [
+      "Flower Pot",
+      "Swiffer",
+      "Monsterra plushie"
+    ],
+    "christmasGiftIdeas": [
+      "Apron",
+      "Recipe book by Ina Garten",
+      "Shark Vacuum"
+    ],
+    "anniversaryGiftIdeas": [
+      "Handmade card"
+    ],
+    "shirtSize": "S",
+    "pantSize": "26",
+    "shoeSize": "8.5"
+}
