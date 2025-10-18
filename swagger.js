@@ -10,13 +10,12 @@ const options = {
       description: 'API for managing family gift ideas',
     },
     servers: [
-      {
-        url: 'family-gift-tracker.onrender.com',
-        schemes: ['https']
-      },
+        {
+          url: 'https://family-gift-tracker.onrender.com',
+        },
     ],
     components: {           
-      schemas: {            // <-- your FamilyMember schema
+      schemas: {            
         FamilyMember: {
           type: 'object',
           properties: {
