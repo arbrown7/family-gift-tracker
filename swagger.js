@@ -11,10 +11,11 @@ const options = {
     },
     servers: [
       {
-        url: 'http://localhost:3000', // local dev server
+        url: 'family-gift-tracker.onrender.com',
+        schemes: ['https']
       },
     ],
-    components: {           // <-- add this
+    components: {           
       schemas: {            // <-- your FamilyMember schema
         FamilyMember: {
           type: 'object',
