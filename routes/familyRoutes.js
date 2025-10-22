@@ -1,6 +1,6 @@
-import express from 'express';
-import * as familyController from '../controllers/familyController.js';
-import { validateFamilyMember } from '../middleware/validate.js';
+const express = require('express');
+const familyController = require('../controllers/familyController');
+const { validateFamilyMember } = require('../middleware/validate');
 
 const router = express.Router();
 
@@ -94,4 +94,4 @@ router.put('/:id', validateFamilyMember, familyController.updateFamilyMember);
 // DELETE: remove a family member by ID
 router.delete('/:id', familyController.deleteFamilyMember);
 
-export default router;
+module.exports = router;

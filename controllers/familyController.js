@@ -1,7 +1,7 @@
-import FamilyMember from '../models/FamilyMember.js';
-import mongoose from 'mongoose';
+const FamilyMember = require('../models/FamilyMember');
+const mongoose = require('mongoose');
 
-export const getAll = async (req, res) => {
+const getAll = async (req, res) => {
   try {
     const familyMembers = await FamilyMember.find();
     res.status(200).json(familyMembers);
@@ -10,7 +10,7 @@ export const getAll = async (req, res) => {
   }
 };
 
-export const getSingle = async (req, res) => {
+const getSingle = async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
     return res.status(400).json({ message: 'Invalid ID format' });
   }
@@ -23,7 +23,7 @@ export const getSingle = async (req, res) => {
   }
 };
 
-export const createFamilyMember = async (req, res) => {
+const createFamilyMember = async (req, res) => {
   try {
     const member = new FamilyMember(req.body);
     await member.save();
@@ -33,7 +33,7 @@ export const createFamilyMember = async (req, res) => {
   }
 };
 
-export const updateFamilyMember = async (req, res) => {
+const updateFamilyMember = async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
     return res.status(400).json({ message: 'Invalid ID format' });
   }
@@ -46,7 +46,7 @@ export const updateFamilyMember = async (req, res) => {
   }
 };
 
-export const deleteFamilyMember = async (req, res) => {
+const deleteFamilyMember = async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
     return res.status(400).json({ message: 'Invalid ID format' });
   }
@@ -57,4 +57,12 @@ export const deleteFamilyMember = async (req, res) => {
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
+};
+
+module.exports = {
+  getAll,
+  getSingle,
+  createFamilyMember,
+  updateFamilyMember,
+  deleteFamilyMember
 };

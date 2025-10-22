@@ -1,5 +1,5 @@
-import swaggerJsDoc from 'swagger-jsdoc';
-import swaggerUi from 'swagger-ui-express';
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
 
 const options = {
   definition: {
@@ -10,9 +10,10 @@ const options = {
       description: 'API for managing family gift ideas',
     },
     servers: [
-        {
-          url: 'https://family-gift-tracker.onrender.com',
-        },
+      {
+        url: 'https://family-gift-tracker.onrender.com',
+        //url: 'http://localhost:3000', //comment this out before committing
+      },
     ],
     components: {           
       schemas: {            
@@ -20,7 +21,7 @@ const options = {
           type: 'object',
           properties: {
             name: { type: 'string' },
-            birthdate: { type: 'string', format: 'date' },
+            birthday: { type: 'string', format: 'date' },
             anniversary: { type: 'string', format: 'date' },
             relation: { type: 'string' },
             interests: {
@@ -52,4 +53,4 @@ const options = {
 
 const specs = swaggerJsDoc(options);
 
-export { swaggerUi, specs };
+module.exports = { swaggerUi, specs };

@@ -1,23 +1,24 @@
-import express from 'express';
-import mongoose from 'mongoose';
-import dotenv from 'dotenv';
-import { swaggerUi, specs } from './swagger.js';
+const express = require('express');
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+const { swaggerUi, specs } = require('./swagger.js');
 
-import familyRoutes from './routes/familyRoutes.js';
+const familyRoutes = require('./routes/familyRoutes');
 
 dotenv.config();
+
 const app = express();
 app.use(express.json());
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI)
-    .then(() => console.log('Connected to MongoDB'))
-    .catch(err => console.error(err));
+  .then(() => console.log('Connected to MongoDB'))
+  .catch(err => console.error(err));
 
 mongoose.connection.once('open', () => {
-    console.log(`Connected to DB: ${mongoose.connection.name}`);
-    });
-      
+  console.log(`Connected to DB: ${mongoose.connection.name}`);
+});
+
 // Use the routes
 app.use('/api/family', familyRoutes);
 

@@ -1,6 +1,6 @@
 const validator = require('../helpers/validate');
 
-const saveFamilyMember = (req, res, next) => {
+const validateFamilyMember = (req, res, next) => {
   const validationRule = {
     name: 'required|string',
     birthday: 'required|string',
@@ -46,6 +46,4 @@ const saveFamilyMember = (req, res, next) => {
   });
 };
 
-module.exports = {
-  saveFamilyMember
-};
+module.exports = { validateFamilyMember };
