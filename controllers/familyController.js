@@ -40,7 +40,7 @@ const updateFamilyMember = async (req, res) => {
   try {
     const updated = await FamilyMember.findByIdAndUpdate(req.params.id, req.body, { new: true });
     if (!updated) return res.status(404).json({ message: 'Family member not found' });
-    res.status(200).json(updated);
+    res.status(204).json(updated);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -53,7 +53,7 @@ const deleteFamilyMember = async (req, res) => {
   try {
     const deleted = await FamilyMember.findByIdAndDelete(req.params.id);
     if (!deleted) return res.status(404).json({ message: 'Family member not found' });
-    res.status(204).send();
+    res.status(200).send();
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
