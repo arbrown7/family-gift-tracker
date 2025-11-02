@@ -9,9 +9,13 @@ const router = express.Router();
  * /api/family:
  *   get:
  *     summary: Get all family members
+ *     security:
+ *       - googleAuth: []
  *     responses:
  *       200:
  *         description: List of family members
+ *       401:
+ *         description: Unauthorized
  */
 // GET all family members
 router.get('/', familyController.getAll);
@@ -21,6 +25,8 @@ router.get('/', familyController.getAll);
  * /api/family/{id}:
  *   get:
  *     summary: Get a family member by ID
+ *     security:
+ *       - googleAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -30,6 +36,8 @@ router.get('/', familyController.getAll);
  *     responses:
  *       200:
  *         description: A single family member
+ *       401:
+ *         description: Unauthorized
  */
 // GET a single family member by ID
 router.get('/:id', familyController.getSingle);
@@ -39,6 +47,8 @@ router.get('/:id', familyController.getSingle);
  * /api/family:
  *   post:
  *     summary: Add a new family member
+ *     security:
+ *       - googleAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -48,6 +58,8 @@ router.get('/:id', familyController.getSingle);
  *     responses:
  *       201:
  *         description: Family member created
+ *       401:
+ *         description: Unauthorized
  */
 // POST a new family member
 router.post('/', validateFamilyMember, familyController.createFamilyMember);
@@ -57,6 +69,8 @@ router.post('/', validateFamilyMember, familyController.createFamilyMember);
  * /api/family/{id}:
  *   put:
  *     summary: Update a family member
+ *     security:
+ *       - googleAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -70,8 +84,10 @@ router.post('/', validateFamilyMember, familyController.createFamilyMember);
  *           schema:
  *             $ref: '#/components/schemas/FamilyMember'
  *     responses:
- *       200:
+ *       204:
  *         description: Family member updated
+ *       401:
+ *         description: Unauthorized
  */
 // PUT: update a family member by ID
 router.put('/:id', validateFamilyMember, familyController.updateFamilyMember);
@@ -81,6 +97,8 @@ router.put('/:id', validateFamilyMember, familyController.updateFamilyMember);
  * /api/family/{id}:
  *   delete:
  *     summary: Delete a family member
+ *     security:
+ *       - googleAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -90,6 +108,8 @@ router.put('/:id', validateFamilyMember, familyController.updateFamilyMember);
  *     responses:
  *       200:
  *         description: Family member deleted
+ *       401:
+ *         description: Unauthorized
  */
 // DELETE: remove a family member by ID
 router.delete('/:id', familyController.deleteFamilyMember);

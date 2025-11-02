@@ -1,16 +1,26 @@
+const dotenv = require('dotenv');
+const result = dotenv.config({ path: __dirname + '/.env' });
+
 const express = require('express');
 const mongoose = require('mongoose');
-const dotenv = require('dotenv');
+const session = require('express-session');
+const passport = require('./config/passport');
 const { swaggerUi, specs } = require('./swagger.js');
-
 const familyRoutes = require('./routes/familyRoutes');
-
-dotenv.config();
 
 const app = express();
 app.use(express.json());
 
-// Connect to MongoDB
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.error(err));
@@ -19,10 +29,36 @@ mongoose.connection.once('open', () => {
   console.log(`Connected to DB: ${mongoose.connection.name}`);
 });
 
-// Use the routes
-app.use('/api/family', familyRoutes);
+app.get(
+  '/auth/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] })
+);
 
-// Swagger UI route
+app.get(
+  '/auth/google/callback',
+  passport.authenticate('google', {
+    failureRedirect: '/login-failed',
+    successRedirect: '/login-success',
+  })
+);
+
+app.get('/login-success', (req, res) => {
+  res.send('Login successful!');
+});
+
+app.get('/login-failed', (req, res) => {
+  res.send('Login failed');
+});
+
+app.get('/logout', (req, res) => {
+  req.logout(() => {
+    res.send('Logged out');
+  });
+});
+
+const { ensureAuthenticated } = require('./middleware/auth');
+app.use('/api/family', ensureAuthenticated, familyRoutes);
+
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 const PORT = process.env.PORT || 3000;

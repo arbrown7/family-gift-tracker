@@ -15,7 +15,18 @@ const options = {
         //url: 'http://localhost:3000', //comment this out before committing
       },
     ],
-    components: {           
+    components: {
+      securitySchemes: {
+        googleAuth: {
+          type: 'oauth2',
+          flows: {
+            implicit: { // use implicit for Swagger UI testing
+              authorizationUrl: 'http://localhost:3000/auth/google',
+              scopes: {},
+            },
+          },
+        },
+      },           
       schemas: {            
         FamilyMember: {
           type: 'object',
