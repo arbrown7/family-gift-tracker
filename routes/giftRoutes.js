@@ -2,7 +2,7 @@ const express = require('express');
 const giftController = require('../controllers/giftController');
 const { validateGift } = require('../helpers/validateGift');
 
-const router = require('express').Router();
+const router = express.Router();
 
 /**
  * @swagger
@@ -14,12 +14,33 @@ const router = require('express').Router();
  *     responses:
  *       200:
  *         description: List of gifts
- *     400:
- *         description: Validation failed / bad request
  *       401:
  *         description: Unauthorized
  */
 router.get('/', giftController.getAll);
+
+/**
+ * @swagger
+ * /api/gifts/{id}:
+ *   get:
+ *     summary: Get a single gift
+ *     security:
+ *       - googleAuth: []
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: Gift found
+ *       400:
+ *         description: Invalid ID
+ *       401:
+ *         description: Unauthorized
+ *       404:
+ *         description: Gift not found
+ */
+router.get('/:id', giftController.getSingle);
 
 /**
  * @swagger
@@ -50,12 +71,14 @@ router.post('/', validateGift, giftController.create);
  *         in: path
  *         required: true
  *     responses:
- *       200:
- *         description: Gift updated
+ *       204:
+ *         description: Gift updated successfully
  *       400:
  *         description: Validation failed / bad request
  *       401:
  *         description: Unauthorized
+ *       404:
+ *         description: Gift not found
  */
 router.put('/:id', validateGift, giftController.update);
 
@@ -72,11 +95,13 @@ router.put('/:id', validateGift, giftController.update);
  *         required: true
  *     responses:
  *       200:
- *         description: Gift deleted
+ *         description: Gift deleted successfully
  *       400:
- *         description: Validation failed / bad request
+ *         description: Invalid ID
  *       401:
  *         description: Unauthorized
+ *       404:
+ *         description: Gift not found
  */
 router.delete('/:id', giftController.delete);
 
