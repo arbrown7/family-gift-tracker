@@ -56,6 +56,16 @@ const options = {
             shoeSize: { type: 'string' }
           },
         },
+        Gift: {
+          type: 'object',
+          properties: {
+            name: { type: 'string' },
+            price: { type: 'number' }, // numeric instead of string
+            purchased: { type: 'boolean' },
+            familyMember: { type: 'string', description: 'ObjectId of a FamilyMember' }
+          },
+          required: ['name', 'price'] // mark required fields
+        }        
       },
     },
   },
