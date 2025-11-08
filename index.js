@@ -7,6 +7,8 @@ const session = require('express-session');
 const passport = require('./config/passport');
 const { swaggerUi, specs } = require('./swagger.js');
 const familyRoutes = require('./routes/familyRoutes');
+const giftRoutes = require('./routes/giftRoutes');
+
 
 const app = express();
 app.use(express.json());
@@ -58,6 +60,8 @@ app.get('/logout', (req, res) => {
 
 const { ensureAuthenticated } = require('./middleware/auth');
 app.use('/api/family', ensureAuthenticated, familyRoutes);
+app.use('/api/gifts', ensureAuthenticated, giftRoutes);
+
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
