@@ -2,7 +2,7 @@ const validator = require('../helpers/validate');
 
 const validateGift = (req, res, next) => {
   const validationRule = {
-    name: 'required|string',
+    item: 'required|string',
     price: 'numeric',
     purchased: 'boolean',
     familyMember: 'string' // optional ObjectId reference to Family
