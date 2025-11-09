@@ -59,10 +59,10 @@ const options = {
         Gift: {
           type: 'object',
           properties: {
-            name: { type: 'string' },
-            price: { type: 'number' }, // numeric instead of string
+            item: { type: 'string' },
+            price: { type: 'string' },
             purchased: { type: 'boolean' },
-            familyMember: { type: 'string', description: 'ObjectId of a FamilyMember' }
+            familyMember: { type: 'string' }
           },
           required: ['name', 'price'] // mark required fields
         }        

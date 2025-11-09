@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
 const giftSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  price: Number,
+  item: { type: String, required: true },
+  price: String,
   purchased: { type: Boolean, default: false },
-  familyMember: { type: mongoose.Schema.Types.ObjectId, ref: 'Family' }
+  familyMember: { type: String }
 });
 
 module.exports = mongoose.model('Gift', giftSchema);
