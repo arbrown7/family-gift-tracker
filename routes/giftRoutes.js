@@ -14,6 +14,8 @@ const router = express.Router();
  *     responses:
  *       200:
  *         description: List of gifts
+ *       400:
+ *         description: Validation failed / bad request
  *       401:
  *         description: Unauthorized
  */
@@ -49,6 +51,12 @@ router.get('/:id', giftController.getSingle);
  *     summary: Create a new gift
  *     security:
  *       - googleAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Gift'
  *     responses:
  *       201:
  *         description: Gift created
@@ -70,9 +78,18 @@ router.post('/', validateGift, giftController.create);
  *       - name: id
  *         in: path
  *         required: true
+ *         description: ID of the gift to update
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Gift'
  *     responses:
- *       204:
- *         description: Gift updated successfully
+ *       200:
+ *         description: Gift updated
  *       400:
  *         description: Validation failed / bad request
  *       401:
@@ -93,11 +110,14 @@ router.put('/:id', validateGift, giftController.update);
  *       - name: id
  *         in: path
  *         required: true
+ *         description: ID of the gift to delete
+ *         schema:
+ *           type: string
  *     responses:
  *       200:
- *         description: Gift deleted successfully
+ *         description: Gift deleted
  *       400:
- *         description: Invalid ID
+ *         description: Validation failed / bad request
  *       401:
  *         description: Unauthorized
  *       404:
